@@ -3,7 +3,7 @@ import { fetchPostBySearch } from "@/lib/query/post";
 import React from "react";
 
 // Force dynamic rendering
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 type SearchPageProps = {
   searchParams: Promise<{ term: string }>;
@@ -15,7 +15,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
     <div>
       <h1 className="text-blue-600 font-medium italic">
         Search Result for {term}
-      </h1> 
+      </h1>
       <PostList fetchData={() => fetchPostBySearch(term)} />
     </div>
   );

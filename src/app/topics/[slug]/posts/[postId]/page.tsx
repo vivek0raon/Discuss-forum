@@ -7,7 +7,7 @@ import Link from "next/link";
 import React, { Suspense } from "react";
 
 // Force dynamic rendering
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 type PostShowPageProps = {
   params: Promise<{ slug: string; postId: string }>;

@@ -4,7 +4,7 @@ import TopicList from "@/components/topics/TopicList";
 import { fetchTopPost } from "@/lib/query/post";
 
 // Force dynamic rendering
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   return (

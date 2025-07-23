@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import React from "react";
 
 // Force dynamic rendering
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 const TopicShowPage = async ({
   params,
