@@ -56,7 +56,9 @@ export const createPost = async (
 
     try {
       imagePath = await saveImage(imageFile);
-    } catch {
+      console.log("Image uploaded successfully:", imagePath);
+    } catch (error) {
+      console.error("Image upload failed:", error);
       return {
         errors: {
           image: ["Failed to upload image. Please try again."],

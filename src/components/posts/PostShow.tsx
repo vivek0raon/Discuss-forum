@@ -23,6 +23,10 @@ const PostShow = async ({ postId }: { postId: string }) => {
             fill
             className="object-cover"
             priority
+            onError={(e) => {
+              console.error("Image failed to load:", post.image);
+              console.error("Error:", e);
+            }}
           />
         </div>
       )}
