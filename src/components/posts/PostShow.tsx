@@ -14,9 +14,9 @@ const PostShow = async ({ postId }: { postId: string }) => {
   }
   return (
     <div className="space-y-4">
-      <h1 className="font-bold my-2 text-2xl">{post.title}</h1>
+      <h1 className="font-bold my-2 text-xl sm:text-2xl">{post.title}</h1>
       {post.image && (
-        <div className="relative w-full h-64 md:h-96 overflow-hidden rounded-lg border">
+        <div className="relative w-full h-48 sm:h-64 md:h-96 overflow-hidden rounded-lg border">
           <Image
             src={post.image}
             alt={post.title}
@@ -26,8 +26,10 @@ const PostShow = async ({ postId }: { postId: string }) => {
           />
         </div>
       )}
-      <div className="rounded border-2 p-4 bg-card">
-        <p className="text-foreground whitespace-pre-wrap">{post.content}</p>
+      <div className="rounded border-2 p-3 sm:p-4 bg-card">
+        <p className="text-foreground whitespace-pre-wrap text-sm sm:text-base">
+          {post.content}
+        </p>
       </div>
     </div>
   );

@@ -38,11 +38,13 @@ export default function RootLayout({
         >
           <SessionProvider>
             <div className="w-full shadow-sm border-b">
-              <div className="container mx-auto max-w-6xl">
+              <div className="container mx-auto max-w-6xl px-2 sm:px-4">
                 <Header />
               </div>
             </div>
-            <div className="container mx-auto max-w-6xl">{children}</div>
+            <div className="container mx-auto max-w-6xl px-2 sm:px-4">
+              {children}
+            </div>
           </SessionProvider>
         </ThemeProvider>
       </body>

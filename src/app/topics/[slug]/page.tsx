@@ -23,15 +23,19 @@ const TopicShowPage = async ({
   }
 
   return (
-    <div className="grid grid-cols-4 gap-4 p-4">
-      <div className="col-span-3 grid gap-4">
+    <div className="flex flex-col lg:grid lg:grid-cols-4 gap-4 p-2 sm:p-4">
+      <div className="lg:col-span-3 grid gap-4">
         <div className="space-y-2">
-          <h1 className="font-bold text-3xl capitalize">{topic.slug}</h1>
-          <p className="text-muted-foreground text-lg">{topic.description}</p>
+          <h1 className="font-bold text-2xl sm:text-3xl capitalize">
+            {topic.slug}
+          </h1>
+          <p className="text-muted-foreground text-base sm:text-lg">
+            {topic.description}
+          </p>
         </div>
         <PostList fetchData={() => fetchPostByTopicSlug(slug)} />
       </div>
-      <div>
+      <div className="mt-6 lg:mt-0">
         <PostCreateForm slug={slug} />
       </div>
     </div>

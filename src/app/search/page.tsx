@@ -12,9 +12,9 @@ type SearchPageProps = {
 const SearchPage = async ({ searchParams }: SearchPageProps) => {
   const term = (await searchParams).term;
   return (
-    <div>
-      <h1 className="text-blue-600 font-medium italic">
-        Search Result for {term}
+    <div className="p-2 sm:p-4">
+      <h1 className="text-base sm:text-lg text-blue-600 font-medium italic mb-4">
+        Search Results for &ldquo;{term}&rdquo;
       </h1>
       <PostList fetchData={() => fetchPostBySearch(term)} />
     </div>

@@ -22,46 +22,62 @@ const TopicCreateForm = () => {
     <Dialog>
       <form>
         <DialogTrigger asChild>
-          <Button className="p-2">New topic</Button>
+          <Button className="w-full sm:w-auto text-sm sm:text-base">
+            New Topic
+          </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px] mx-4 sm:mx-0">
           <form action={action} className="grid gap-4">
             <DialogHeader>
-              <DialogTitle>Create a Topic</DialogTitle>
-              <DialogDescription>
+              <DialogTitle className="text-lg">Create a Topic</DialogTitle>
+              <DialogDescription className="text-sm">
                 Write a new topic to start discussion. Click save when
                 you&apos;re done.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4">
               <div className="grid gap-3">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" name="name" />
+                <Label htmlFor="name" className="text-sm">
+                  Name
+                </Label>
+                <Input id="name" name="name" className="text-sm" />
               </div>
               {formState.errors.name && (
-                <p className="text-sm text-red-600">{formState.errors.name}</p>
+                <p className="text-xs sm:text-sm text-red-600">
+                  {formState.errors.name}
+                </p>
               )}
               <div className="grid gap-3">
-                <Label htmlFor="description">Description</Label>
-                <Textarea id="description" name="description" />
+                <Label htmlFor="description" className="text-sm">
+                  Description
+                </Label>
+                <Textarea
+                  id="description"
+                  name="description"
+                  className="text-sm min-h-[80px]"
+                />
               </div>
               {formState.errors.description && (
-                <p className="text-sm text-red-600">
+                <p className="text-xs sm:text-sm text-red-600">
                   {formState.errors.description}
                 </p>
               )}
 
               {formState.errors.formError && (
-                <div className="border border-red-600 bg-red-200 p-2 rounded">
+                <div className="border border-red-600 bg-red-200 p-2 rounded text-sm">
                   {formState.errors.formError}
                 </div>
               )}
             </div>
-            <DialogFooter>
+            <DialogFooter className="flex flex-col sm:flex-row gap-2">
               <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
+                <Button variant="outline" className="text-sm">
+                  Cancel
+                </Button>
               </DialogClose>
-              <Button type="submit">Save changes</Button>
+              <Button type="submit" className="text-sm">
+                Save Changes
+              </Button>
             </DialogFooter>
           </form>
         </DialogContent>

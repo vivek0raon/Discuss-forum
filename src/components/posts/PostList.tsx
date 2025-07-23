@@ -52,8 +52,15 @@ const PostList: React.FC<PostListProp> = async ({ fetchData }) => {
   const posts = await fetchData();
   if (posts.length === 0) {
     return (
-      <div className="flex items-center justify-center text-6xl font-bold font-mono text-muted-foreground">
-        <h1>No Posts Found!</h1>
+      <div className="flex items-center justify-center p-8 sm:p-12">
+        <div className="text-center">
+          <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold font-mono text-muted-foreground">
+            No Posts Found!
+          </h1>
+          <p className="text-sm sm:text-base text-muted-foreground/70 mt-2">
+            Be the first to create a post in this topic.
+          </p>
+        </div>
       </div>
     );
   }
@@ -82,15 +89,15 @@ const PostList: React.FC<PostListProp> = async ({ fetchData }) => {
   );
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3 sm:gap-4">
       {postsWithComments.map((post) => (
         <Link
           href={`/topics/${post.topic.slug}/posts/${post.id}`}
           key={post.id}
         >
-          <Card>
+          <Card className="hover:shadow-md transition-shadow">
             {post.image && (
-              <div className="relative w-full h-48 overflow-hidden rounded-t-lg">
+              <div className="relative w-full h-32 sm:h-48 overflow-hidden rounded-t-lg">
                 <Image
                   src={post.image}
                   alt={post.title}
@@ -99,13 +106,15 @@ const PostList: React.FC<PostListProp> = async ({ fetchData }) => {
                 />
               </div>
             )}
-            <CardHeader>
-              <CardTitle>{post.title}</CardTitle>
-              <CardDescription className="flex items-center justify-between">
-                <p className="text-sm text-muted-foreground line-clamp-2 ">
+            <CardHeader className="p-3 sm:p-6">
+              <CardTitle className="text-base sm:text-lg">
+                {post.title}
+              </CardTitle>
+              <CardDescription className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2 flex-1">
                   {post.content}
                 </p>
-                <div className="flex flex-col gap-3 justify-between">
+                <div className="flex flex-col gap-2 sm:gap-3 sm:justify-between sm:items-end">
                   <AvatarCircles
                     numPeople={post._count.comments}
                     avatarUrls={
@@ -113,19 +122,26 @@ const PostList: React.FC<PostListProp> = async ({ fetchData }) => {
                     }
                   />
                   <div className="flex gap-1 items-center">
-                    <MessageCircle size={16} />
-                    <h1>{post._count.comments}</h1>
-                    <h1>Comments</h1>
+                    <MessageCircle size={14} className="sm:size-4" />
+                    <span className="text-xs sm:text-sm">
+                      {post._count.comments}
+                    </span>
+                    <span className="text-xs sm:text-sm">Comments</span>
                   </div>
                 </div>
               </CardDescription>
             </CardHeader>
-            <CardFooter className="flex gap-3 items-center">
-              <Avatar className="size-5">
-                <AvatarImage src={post.user.image || ""} alt="@shadcn" />
-                <AvatarFallback>CN</AvatarFallback>
+            <CardFooter className="flex gap-2 sm:gap-3 items-center p-3 sm:p-6 pt-0">
+              <Avatar className="size-4 sm:size-5">
+                <AvatarImage
+                  src={post.user.image || ""}
+                  alt={post.user.name || "User"}
+                />
+                <AvatarFallback className="text-xs">
+                  {post.user.name?.charAt(0) || "U"}
+                </AvatarFallback>
               </Avatar>
-              <h1 className="text-xs text-muted-foreground">
+              <h1 className="text-xs text-muted-foreground truncate">
                 {post.user.name}
               </h1>
             </CardFooter>

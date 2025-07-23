@@ -9,15 +9,19 @@ const CommentList = async ({ postId }: { postId: string }) => {
     (comment) => comment.parentId === null
   );
   return (
-    <div>
-      <h1 className="font-bold text-lg">All 0 Comments</h1>
-      {topLevelComment.map((comment) => (
-        <CommentShow
-          key={comment.id}
-          postId={comment.postId}
-          commentId={comment.id}
-        />
-      ))}
+    <div className="space-y-4">
+      <h1 className="font-bold text-base sm:text-lg">
+        All {topLevelComment.length} Comments
+      </h1>
+      <div className="space-y-3">
+        {topLevelComment.map((comment) => (
+          <CommentShow
+            key={comment.id}
+            postId={comment.postId}
+            commentId={comment.id}
+          />
+        ))}
+      </div>
     </div>
   );
 };

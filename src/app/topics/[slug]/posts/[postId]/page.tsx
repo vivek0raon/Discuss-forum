@@ -17,14 +17,21 @@ const PostShowPage: React.FC<PostShowPageProps> = async ({ params }) => {
   const { slug, postId } = await params;
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 p-2 sm:p-4">
       <Link href={`/topics/${slug}`}>
-        <Button variant={"link"}>
-          <ChevronLeft />
-          back to {slug}
+        <Button variant={"link"} className="p-0 h-auto">
+          <ChevronLeft className="w-4 h-4" />
+          <span className="text-sm sm:text-base">back to {slug}</span>
         </Button>
       </Link>
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense
+        fallback={
+          <div className="space-y-4">
+            <div className="h-8 bg-muted animate-pulse rounded w-3/4" />
+            <div className="h-48 bg-muted animate-pulse rounded" />
+          </div>
+        }
+      >
         <PostShow postId={postId} />
       </Suspense>
       <CommentCreateForm postId={postId} startOpen />
