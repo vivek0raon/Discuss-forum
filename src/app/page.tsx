@@ -3,6 +3,9 @@ import TopicCreateForm from "@/components/topics/TopicCreateForm";
 import TopicList from "@/components/topics/TopicList";
 import { fetchTopPost } from "@/lib/query/post";
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+
 export default async function Home() {
   return (
     <div className="grid grid-cols-4 gap-4 p-4">

@@ -2,6 +2,9 @@ import PostList from "@/components/posts/PostList";
 import { fetchPostBySearch } from "@/lib/query/post";
 import React from "react";
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+
 type SearchPageProps = {
   searchParams: Promise<{ term: string }>;
 };
