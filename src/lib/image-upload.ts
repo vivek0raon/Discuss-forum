@@ -1,24 +1,31 @@
-import { writeFile } from "fs/promises";
-import { join } from "path";
+import { v2 as cloudinary } from "cloudinary";
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function saveImage(image: File): Promise<string> {
-  // Create unique filename
-  const timestamp = Date.now();
-  const extension = image.name.split(".").pop();
-  const filename = `${timestamp}-${Math.random()
-    .toString(36)
-    .substring(2)}.${extension}`;
+  try {
+    // Convert file to base64
+    const bytes = await image.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const base64Data = buffer.toString("base64");
+    const dataURI = `data:${image.type};base64,${base64Data}`;
 
-  // Convert file to buffer
-  const bytes = await image.arrayBuffer();
-  const buffer = Buffer.from(bytes);
+    // Upload to Cloudinary
+    const result = await cloudinary.uploader.upload(dataURI, {
+      folder: "discuss-forum", // Optional: organize uploads in a folder
+      resource_type: "auto",
+    });
 
-  // Save to public/uploads directory
-  const path = join(process.cwd(), "public/uploads", filename);
-  await writeFile(path, buffer);
-
-  // Return the public URL path
-  return `/uploads/${filename}`;
+    return result.secure_url;
+  } catch (error) {
+    console.error("Cloudinary upload error:", error);
+    throw new Error("Failed to upload image");
+  }
 }
 
 export function isValidImageFile(file: File): boolean {
